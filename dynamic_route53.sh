@@ -11,5 +11,5 @@ aws cloudformation update-stack \
   --parameters \
       ParameterKey=IP,ParameterValue=$PUBLIC_IP \
       ParameterKey=HostedZoneName,ParameterValue=$HOSTED_ZONE_NAME \
-      ParameterKey=HostedZoneID,ParameterValue=$HOSTED_ZONE_ID \
+      ParameterKey=HostedZoneID,ParameterValue=$HOSTED_ZONE_ID
 
