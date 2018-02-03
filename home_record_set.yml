@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates a Route53 Record Set and IAM credentials which can update it.
+
+Parameters:
+  IP:
+    Description: the IP address that the record will point to
+    Type: String
+    AllowedPattern: "[0-9]{1-3}-[0-9]{1-3}-[0-9]{1-3}-[0-9]{1-3}"
+
+  HostedZoneName:
+    Description: the hosted zone name that the record set will be made in
+    Type: String
+
+  RecordSetName:
+    Description: the name of the record set
+    Type: String
+    Default: home
+
+Resources:
+  RecordSet:
+    Type: "AWS::Route53::RecordSet"
+      Properties:
+        AliasTarget: !Ref IP
+        HostedZoneName: !Ref HostedZoneName
+        Name: !Ref RecordSetName
+        TTL: 60
+        Type: A
+
