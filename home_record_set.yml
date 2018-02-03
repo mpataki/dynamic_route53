@@ -10,6 +10,10 @@ Parameters:
     Description: the hosted zone name that the record set will be made in
     Type: String
 
+  HostedZoneID:
+    Description: the hosted zone ID that the record set will be made in
+    Type: String
+
   Subdomain:
     Description: the name of the record set
     Type: String
@@ -28,4 +32,20 @@ Resources:
       ResourceRecords:
         - !Ref IP
       TTL: 60
+
+  IAMUser:
+    Type: "AWS::IAM::User"
+    Properties:
+      Policies:
+        - PolicyName: Route53RecordSetUpdate
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: VisualEditor0
+                Effect: Allow
+                Action: route53:ChangeResourceRecordSets
+                Resource: !Sub
+                  - "arn:aws:route53:::hostedzone/${HostedZoneID}"
+                  - HostedZoneID: !Ref HostedZoneID
+      UserName: DynamicDNS
 
