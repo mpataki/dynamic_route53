@@ -4,7 +4,6 @@ HOSTED_ZONE_NAME=$1
 HOSTED_ZONE_ID=$2
 
 aws cloudformation update-stack \
-  --profile personal \
   --stack-name HomeDynamicDNS \
   --template-body file://home_record_set.yml \
   --capabilities CAPABILITY_NAMED_IAM \
